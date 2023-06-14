@@ -22,6 +22,9 @@ const IndexPage = () => {
     setLoading(false)
   }
 
+  function handleCopy() {
+    navigator.clipboard.writeText(output)
+  }
   return (
     <div className="w-[25rem] h-[35rem] bg-gray-900 text-white flex justify-center p-1 pt-3">
       <div className="flex w-full flex-col items-center gap-4">
@@ -55,7 +58,7 @@ const IndexPage = () => {
           </div>
         </div>
         <div className="flex gap-4">
-        <button className="rounded-lg bg-gray-300 text-black font-semibold tracking-tight p-2">
+        <button onClick={() => handleCopy()} className="rounded-lg bg-gray-300 text-black font-semibold tracking-tight p-2">
          Accept Prompt
         </button>
         <button className="rounded-lg bg-gray-300 text-black font-semibold tracking-tight p-2">
