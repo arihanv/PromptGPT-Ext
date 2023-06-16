@@ -7,18 +7,18 @@ const IndexPage = () => {
   const [loading, setLoading] = React.useState(true);
 
   async function getQuery(query) {
-    setLoading(true);
-    // await new Promise((resolve) => {
-    //   setOutput("generating");
-    //   setTimeout(resolve, 2000);
-    // });
-
-    // setOutput(query);
-    // setLoading(false);
-    // return;
+    setOutput("Generating...");
+    try {
+      const stat = await fetch(`https://gpt-api-z4khdeirua-uc.a.run.app/status`);
+      const stat_res = await stat.json();
+    } catch {
+      setOutput("Error: Server is busy. Try again later.")
+      return;
+    }
 
     try {
       setLoading(true);
+      console.log("Sent request");
       const res = await fetch(
         `https://gpt-api-z4khdeirua-uc.a.run.app/predict/${query}`
       );
@@ -29,6 +29,7 @@ const IndexPage = () => {
       );
 
       const data = await res.json();
+      console.log(data)
       console.log(data[0].revised);
       setOutput(data[0].revised);
     } catch {
